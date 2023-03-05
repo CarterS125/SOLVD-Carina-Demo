@@ -23,12 +23,14 @@ import com.qaprosoft.carina.core.foundation.api.http.HttpMethodType;
 import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatusType;
 import com.zebrunner.carina.utils.Configuration;
 
-@Endpoint(url = "${base_url}/users", methodType = HttpMethodType.GET)
+@Endpoint(url = "${base_url}/posts/${user_id}", methodType = HttpMethodType.GET)
 @ResponseTemplatePath(path = "api/users/_get/rs.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
-public class GetUserMethods extends AbstractApiMethodV2 {
+public class GetUserMethod extends AbstractApiMethodV2 {
 
-    public GetUserMethods() {
+    public GetUserMethod(int userId) {
         replaceUrlPlaceholder("base_url", Configuration.getEnvArg("api_url"));
+        replaceUrlPlaceholder("user_id", Integer.toString(userId));
     }
+
 }

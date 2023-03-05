@@ -22,7 +22,7 @@ import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import com.zebrunner.carina.core.registrar.tag.Priority;
 import com.zebrunner.carina.core.registrar.tag.TestPriority;
 import com.qaprosoft.carina.demo.api.DeleteUserMethod;
-import com.qaprosoft.carina.demo.api.GetUserMethods;
+import com.qaprosoft.carina.demo.api.GetUserMethod;
 import com.qaprosoft.carina.demo.api.PostUserMethod;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.slf4j.Logger;
@@ -76,7 +76,7 @@ public class APISampleTest implements IAbstractTest {
     @Test()
     @MethodOwner(owner = "qpsdemo")
     public void testGetUsers() {
-        GetUserMethods getUsersMethods = new GetUserMethods();
+        GetUserMethod getUsersMethods = new GetUserMethod(1);
         getUsersMethods.callAPIExpectSuccess();
         getUsersMethods.validateResponse(JSONCompareMode.STRICT, JsonCompareKeywords.ARRAY_CONTAINS.getKey());
         getUsersMethods.validateResponseAgainstSchema("api/users/_get/rs.schema");
@@ -86,7 +86,7 @@ public class APISampleTest implements IAbstractTest {
     @MethodOwner(owner = "qpsdemo")
     @TestPriority(Priority.P1)
     public void testDeleteUsers() {
-        DeleteUserMethod deleteUserMethod = new DeleteUserMethod();
+        DeleteUserMethod deleteUserMethod = new DeleteUserMethod(1);
         deleteUserMethod.setProperties("api/users/user.properties");
         deleteUserMethod.callAPIExpectSuccess();
         deleteUserMethod.validateResponse();
